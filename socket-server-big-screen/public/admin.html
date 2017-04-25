@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<meta content='width=device-width, initial-scale=1, user-scalable=no' name='viewport' />
+	<head>
+		<style type="text/css">
+			body{
+				/*margin: 0;*/
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-ms-user-select: none;
+			}
+			.main{
+				margin-bottom: 60px;
+				display: inline-block;
+			}
+			.props{
+				width: 12%;
+				float:left;
+				padding-bottom: 30px;
+				/*align-content: center;*/
+				text-align: center;
+			}
+			.imgs{
+				width: 100%;
+			}
+			.imgs:hover{
+				opacity: 1;
+			}
+			.imgsBalloons{
+				/*text-align: center;*/
+				width: 50%;
+			}
+			.btn{
+			float:left;
+				height: 30px !important;
+				width: 60%;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    	<script type="text/javascript" src="socket.io.js"></script>
+    	<script type="text/javascript" src="sendData.js"></script>
+		<script>
+		
+            function sendMsgLeft(e){;
+            	console.log(e + " add to LEFT side");
+				socket.emit("adminLeft", e);
+			}
+			function sendMsgRight(e){;
+            	console.log(e + " add to RIGHT side");
+				socket.emit("adminRight", e);
+			}
+			function leftInfo(){
+				console.log($('#l1').val());
+				socket.emit("leftInfo", $('#l1').val());
+			}
+			function RightInfo(){
+				console.log($('#r1').val());
+				socket.emit("rightInfo", $('#r1').val());
+			}
+
+			function top1(){
+				console.log($('#t1').val());
+				socket.emit("top1", $('#t1').val());
+			}
+			function top2(){
+				console.log($('#t2').val());
+				socket.emit("top2", $('#t2').val());
+			}
+			function top3(){
+				console.log($('#t3').val());
+				socket.emit("top3", $('#t3').val());
+			}
+			function top4(){
+				console.log($('#t4').val());
+				socket.emit("top4", $('#t4').val());
+			}
+		</script>
+	</head>
+
+	<body>
+		<br>
+		<div id="main" class="main">
+			LeftInfo :<input id="l1" type="text" name="usrname">
+			<input type="button" value="Submit" onclick="leftInfo()"/>
+			<br>
+			<br>
+			RightInfo: <input id="r1" type="text" name="usrname">
+			<input type="button" value="Submit" onclick="RightInfo()"/>
+			<br>
+			<br>
+			Top1: <input id="t1" type="text" value="bit.ly/bigleft">
+			<input type="button" value="Submit" onclick="top1()"/>
+			<br>
+			<br>
+			Top2: <input id="t2" type="text" value="bit.ly/bigleft">
+			<input type="button" value="Submit" onclick="top2()"/>
+			<br>
+			<br>
+			Top3: <input id="t3" type="text" value="bit.ly/bigright">
+			<input type="button" value="Submit" onclick="top3()"/>
+			<br>
+			<br>
+			Top4: <input id="t4" type="text" value="bit.ly/bigright">
+			<input type="button" value="Submit" onclick="top4()"/>
+		</div>
+		<div id="main1" class="main">
+			<!-- <div class="props">
+				<img class="imgs" src="img/FruitTruck.png" /><br>
+				<input id="man00" class="btn" type="button" value="Add"/>
+			</div> -->
+		</div>
+		<div id="main2" class="main"></div>
+		<div id="main3" class="main"></div>
+		<div id="main4" class="main"></div>
+		<div id="main5" class="main">
+
+			<div class="props">
+				<img class="imgs" src="img/FruitTruck.png" /><br>
+				<input id="FruitTruck2016" class="btn" type="button" value=" Add To Left " onclick="sendMsgLeft('FruitTruck2016')"/>
+			</div>
+			<div class="props">
+				<img class="imgs" src="img/FruitTruck.png" /><br>
+				<input id="FruitTruck09" class="btn" type="button" value=" Add To Right " onclick="sendMsgRight('FruitTruck09')"/>
+			</div>
+
+		</div>
+
+	<script type="text/javascript">
+
+	socket.on('userLogIn', function(msg){
+		console.log(msg + ' login');
+		$('#'+msg).css("opacity","0.1");
+	});
+	socket.on('userLogOut', function(msg){
+		console.log(msg + ' logOut');
+		$('#'+msg).css("opacity","1");
+	});
+
+	var mans = ['man01','man02','man05','man10','man11', 'man22', 'man33', 'man44', 'man55', 'man66', 
+				'man77', 'man88','man99','man777', 'man789','man876','man888','man987','man999','man111','man123','man135',
+				'man900','man901','man902','man903','man904','man905','man906','man907','man908','man909',
+				'man910','man911','man912','man913','man914','man915','man916','man917','man918','man919'
+				];
+
+	var mansRight = ['man222','man234','man246','man321','man333','man345','man432','man444','man456','man543',
+					 'man555','man567','man654','man666','man678','man765','man800','man801','man802','man803',
+					 'man804','man805','man806','man807','man808','man809','man810','man811','man812','man813',
+					 'man814','man815','man816','man817','man818','man819','man820','man821','man822','man823',
+					 'man824','man825','man826','man827','man828','man829'];
+
+
+
+	var balloons = ['b01','b02','b03','b04','b05','b06','b20','b21','b22','b23',
+					'b24','b25','b26','b27','b28','b29','b30','b31','b32','b33',
+					'b34','b35','b36','b37','b38','b39','b40','b41','b42','b43',
+					'b50','b51','b52','b53','b54','b55','b56','b57'];	
+
+
+		for (i=0; i<mans.length; i++){
+			var info = '<div class="props"><img id="' + mans[i] +'" class="imgs" src="img/Character/' + mans[i] +'.png" /><br><input class="btn" type="button" value="' + mans[i] + '" onclick="sendMsgLeft(\''+ mans[i] +'\')"/></div>';
+			$('#main1').append(info);
+			// $('#'+mans[i]).css("opacity","1");
+		}
+
+
+		for (i=0; i<mansRight.length; i++){
+			var info = '<div class="props"><img id="' + mansRight[i] +'" class="imgs" src="img/Character/' + mansRight[i] +'.png" /><br><input class="btn" type="button" value="' + mansRight[i] + '" onclick="sendMsgRight(\''+ mansRight[i] +'\')"/></div>';
+			$('#main2').append(info);
+			// $('#'+mans[i]).css("opacity","1");
+		}
+
+	
+
+		for (i=0; i<15; i++){
+			var info = '<div class="props"><img id="' + balloons[i] +'" class="imgsBalloons" src="img/Balloons/Balloon' + balloons[i].slice(1,3) +'.png" /><br><input class="btn" type="button" value="' + balloons[i] + '" onclick="sendMsgLeft(\''+ balloons[i] +'\')"/></div>';
+			$('#main3').append(info);
+			// $('#'+balloons[i]).css("opacity","1");
+		}
+
+		for (i=15; i<balloons.length; i++){
+			var info = '<div class="props"><img id="' + balloons[i] +'" class="imgsBalloons" src="img/Balloons/Balloon' + balloons[i].slice(1,3) +'.png" /><br><input class="btn" type="button" value="' + balloons[i] + '" onclick="sendMsgRight(\''+ balloons[i] +'\')"/></div>';
+			$('#main4').append(info);
+			// $('#'+balloons[i]).css("opacity","1");
+		}
+
+	</script>
+
+	</body>
+</html>

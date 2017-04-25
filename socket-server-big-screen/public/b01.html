@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no">
+
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="balloonStyle.css">
+
+    	<script type="text/javascript" src="socket.io.js"></script>
+    	<script type="text/javascript" src="sendData.js"></script>
+		<script>
+			var socketID="b01";    // <-- Change ID here ////////////////////////////////////////////////////////////////////////////
+		</script>
+	</head>
+
+	<body>
+
+	<progress id="progress" value="1" max="100"></progress>
+
+		<div style="width:100%" align="center">
+			<img id="imgs" src="img/Balloons/Balloon01.png"/>  <!-- Change name here//////////////////////////////// -->
+			<img id="phoneHolder" src="img/shakephone.png">
+		</div>
+
+		<div style="color:grey; position:fixed;top:2%;right:2%">
+            <i class="material-icons" style="font-size: 40px;" onclick="openNav()">menu</i>
+        </div>
+
+
+		<div class="btnWrapper">
+			<div id="up" ontouchstart="sendMsg('u')" ontouchend="sendMsg('s')">
+                <img style="pointer-events:none" align="center" width="100%" src="img/balloonBtn/01up.png">
+			</div>	
+
+			<div id="down" ontouchstart="sendMsg('d')" ontouchend="sendMsg('s')">
+                <img style="pointer-events:none" align="center" width="100%" src="img/balloonBtn/01down.png">	
+            </div>
+
+			<div id="left" ontouchstart="sendMsg('l')" ontouchend="sendMsg('s')">
+                <img style="pointer-events:none" align="left" width="100%" src="img/balloonBtn/01left.png">	
+            </div>
+
+			<div id="right" ontouchstart="sendMsg('r')" ontouchend="sendMsg('s')">
+                <img style="pointer-events:none" align="right" width="100%" src="img/balloonBtn/01right.png">
+            </div>	
+		</div>
+
+
+		 <div id="myNav" class="overlay" ontouchstart="closeNav()">
+                <div style="color:grey; position:absolute;top:2%;right:2%">
+                    <i class="material-icons" style="font-size: 40px;" ontouchstart="closeNav()">close</i>
+                </div>
+
+            <div class="overlay-content">
+                <div>
+                    <p>
+                        Hello Master,
+                        <br>now you can press button to control me.
+                    </p>
+                    <p>
+                        <i id="phone" class="material-icons">stay_current_portrait</i><br>
+                        Remember, you can throw fruits every 3 second by shaking your phone.<br>
+					</p>
+                    <p>
+                        Be caraful, some fruits may pop your balloon, then you have to shake your phone to inflate.
+                    </p>      
+                </div>
+                
+            </div>
+            <div id="ResetBtn" ontouchstart="findMe()">
+            <p>
+                        Still have not idea where I am?
+                    </p>
+                    <button>
+                        Click and find me<br/>around the pink bus. <!-- Change text here/// id < 29, pink ////// id >= 29, blue ////////////////////// -->
+                    </button>
+                </div>
+        </div>   
+        <script type="text/javascript" src="balloon.js"></script>
+
+	</body>
+</html>

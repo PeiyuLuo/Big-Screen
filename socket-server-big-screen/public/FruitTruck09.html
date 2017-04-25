@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<meta content='width=device-width, initial-scale=1, user-scalable=no' name='viewport' />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<head>
+		<style type="text/css">
+			#left{
+				margin-right: 10%;
+			}
+			#right{
+				margin-left: 10%;
+			}
+			.btn{
+				width: 20%;
+				height: 80%;
+			}
+			.btnWrapper{
+				height: 80px;
+			}
+			#imgs{
+                position: absolute;
+				margin-top: 30%;
+				width: 60%;
+                left: 20%;
+                transition: all 0.8s;
+                -webkit-transition: all 0.8s;
+			}
+            #gif{
+                display: none;
+                position: absolute;
+                margin-top: 5%;
+                right:0;
+                height: 40%;
+            }
+            #phoneHolder {
+                display: none;
+                animation: shake 1.5s cubic-bezier(.36,.07,.19,.97) infinite;
+                position: absolute;
+                -webkit-user-select:none;
+                margin-top: 30%;
+                width: 40%;
+                left: 60%;
+            }
+            p{
+              padding-left: 5%;
+              padding-right: 5%;
+            }   
+
+
+            .overlay {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                background-color: rgba(0,0,0,0.9);
+                overflow-y: hidden;
+                transition: 0.5s;
+            }
+
+            .overlay-content {
+                position: relative;
+                top: 10%;
+                width: 100%;
+                /*text-align: center;*/
+                margin-top: 30px;
+            }
+            .overlay p {
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .overlay i{
+            color:#ccc;
+            font-size: 50px;
+        }
+
+
+			body{
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-khtml-user-select: none;
+			-ms-user-select: none;
+			}
+            #phone {
+              animation: shake 1.5s cubic-bezier(.36,.07,.19,.97) infinite;
+              transform: translate3d(0, 0, 0);
+              backface-visibility: hidden;
+              perspective: 1000px;
+            }
+
+            @-webkit-keyframes shake {
+              0% {
+                -webkit-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+              }
+
+              2% {
+                -webkit-transform: rotate(15deg);
+                transform: rotate(15deg);
+              }
+
+              4% {
+                -webkit-transform: rotate(-18deg);
+                transform: rotate(-18deg);
+              }
+
+              6% {
+                -webkit-transform: rotate(18deg);
+                transform: rotate(18deg);
+              }
+
+              8% {
+                -webkit-transform: rotate(-22deg);
+                transform: rotate(-22deg);
+              }
+
+              10% {
+                -webkit-transform: rotate(22deg);
+                transform: rotate(22deg);
+              }
+
+              12% {
+                -webkit-transform: rotate(-18deg);
+                transform: rotate(-18deg);
+              }
+
+              14% {
+                -webkit-transform: rotate(18deg);
+                transform: rotate(18deg);
+              }
+
+              16% {
+                -webkit-transform: rotate(-12deg);
+                transform: rotate(-12deg);
+              }
+
+              18% {
+                -webkit-transform: rotate(12deg);
+                transform: rotate(12deg);
+              }
+
+              20% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+              }
+            }
+
+            @keyframes shake {
+              0% {
+                -webkit-transform: rotate(-15deg);
+                -ms-transform: rotate(-15deg);
+                transform: rotate(-15deg);
+              }
+
+              2% {
+                -webkit-transform: rotate(15deg);
+                -ms-transform: rotate(15deg);
+                transform: rotate(15deg);
+              }
+
+              4% {
+                -webkit-transform: rotate(-18deg);
+                -ms-transform: rotate(-18deg);
+                transform: rotate(-18deg);
+              }
+
+              6% {
+                -webkit-transform: rotate(18deg);
+                -ms-transform: rotate(18deg);
+                transform: rotate(18deg);
+              }
+
+              8% {
+                -webkit-transform: rotate(-22deg);
+                -ms-transform: rotate(-22deg);
+                transform: rotate(-22deg);
+              }
+
+              10% {
+                -webkit-transform: rotate(22deg);
+                -ms-transform: rotate(22deg);
+                transform: rotate(22deg);
+              }
+
+              12% {
+                -webkit-transform: rotate(-18deg);
+                -ms-transform: rotate(-18deg);
+                transform: rotate(-18deg);
+              }
+
+              14% {
+                -webkit-transform: rotate(18deg);
+                -ms-transform: rotate(18deg);
+                transform: rotate(18deg);
+              }
+
+              16% {
+                -webkit-transform: rotate(-12deg);
+                -ms-transform: rotate(-12deg);
+                transform: rotate(-12deg);
+              }
+
+              18% {
+                -webkit-transform: rotate(12deg);
+                -ms-transform: rotate(12deg);
+                transform: rotate(12deg);
+              }
+
+              20% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+              }
+            }
+
+		</style>
+    	<script type="text/javascript" src="socket.io.js"></script>
+    	<script type="text/javascript" src="sendData.js"></script>
+		<script>
+			var socketID="FruitTruck09";
+            function sendTest(e){
+            	socket.emit(socketID, e); ///// emit(socketID , message)
+			}	
+			socket.on(socketID, function(msg){
+				console.log(msg);
+				if (msg == "gyroOff"){
+				
+				}
+				else if(msg == "gyroOn"){
+									
+			
+					
+				}
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<div style="width:100%" align="center">
+            <img id="gif"  src="img/throw.gif"/>
+            <img id="imgs" src="img/FruitTruck.png"/>
+		</div>
+		<div style="position:absolute; width:100%; bottom: 20%;">
+			<div class="btnWrapper" align="center">
+				<button id="left" class="btn" ontouchstart="sendTest('l')" ontouchend="sendTest('s')" value="left">Left</button>
+				<button id="right" class="btn"ontouchstart="sendTest('r')" ontouchend="sendTest('s')" value="right">Right</button>
+			</div>
+		</div>
+
+        <div style="color:grey; position:absolute;top:2%;right:2%">
+            <i class="material-icons" style="font-size:40px;" ontouchstart="openNav()">menu</i>
+        </div>
+
+        <div id="myNav" class="overlay" ontouchstart="closeNav()">
+                <div style="color:grey; position:absolute;top:2%;right:2%">
+                    <i class="material-icons" style="font-size: 40px;" ontouchstart="closeNav()">close</i>
+                </div>
+
+            <div class="overlay-content">
+                <div>
+                    <p>
+                        Hello Master,
+                        <br>now you can press button to control me.
+                    </p>
+                    <p>
+                        <i id="phone" class="material-icons">stay_current_portrait</i><br>
+                        Remember, you can throw fruits by shaking your phone.<br>
+                    </p>      
+                </div>
+                
+            </div>
+
+	<script type="text/javascript">
+	  
+	    var fire = false;
+	    var alpha, beta, gamma;
+
+socket.emit("admin",socketID);
+
+        function DetectOrientation(event){
+        	alpha = event.alpha;
+            beta = event.beta;
+            gamma = event.gamma;
+        }
+
+        function DetectThrowingMovement(event){
+	          var x = event.acceleration.x;
+	          var y = event.acceleration.y;
+	          var z = event.acceleration.z;
+	          // var r = event.rotationRate;
+	          var acceTotal = Math.abs(x) + Math.abs(y) + Math.abs(z);
+
+	          if ( !fire && acceTotal > 28){
+	                fire = true;
+	              		console.log("fire!");
+	               	    socket.emit(socketID, "fire");
+	      
+	              setTimeout(function(){ fire = false; }, 800);
+	          }	         
+ 		}  
+
+ 		window.addEventListener('devicemotion', DetectThrowingMovement);
+
+        function openNav() {
+                document.getElementById("myNav").style.height = "100%";
+
+            }
+
+        function closeNav() {
+                document.getElementById("myNav").style.height = "0%";
+            }
+
+	</script>
+
+	</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1, user-scalable=no">
+    <title>man</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="character.css">
+
+    <script type="text/javascript">
+         var socketID="man01"; //////////////////////////////////////////////////////////////////////////////
+    </script>
+    </head>
+    <body>
+        <div style="width:100%" align="center">
+            <img id="characterImg" src="img/Character/man01.png">  <!-- //////////////////////////////// -->
+            <img id="phoneHolder" src="img/shakephone.png">
+        </div>
+
+        <div style="color:grey; position:absolute;top:2%;right:2%">
+            <i class="material-icons" style="font-size:40px;" ontouchstart="openNav()">menu</i>
+        </div>
+
+        <div id="btnWrapper">
+            <div id="left" ontouchstart="send('l')" ontouchend="send('s')">                
+                <img style="pointer-events:none" align="left" width="120%" src="img/Btn/01left.png"> <!-- //////////////////////////////// -->
+            </div>
+
+            <div id="right" ontouchstart="send('r')" ontouchend="send('s')">
+                <img style="pointer-events:none" align="right" width="120%" src="img/Btn/01right.png"> <!-- //////////////////////////////// -->
+            </div>
+        </div>
+
+        <div id="myNav" class="overlay" ontouchstart="closeNav()">
+                <div style="color:grey; position:absolute;top:2%;right:2%">
+                    <i class="material-icons" style="font-size: 40px;" ontouchstart="closeNav()">close</i>
+                </div>
+
+            <div class="overlay-content">
+                <div>
+                    <p>
+                        <!-- <i class="material-icons" >keyboard_arrow_left</i> -->
+                        <!-- <i class="material-icons" >keyboard_arrow_right</i> -->
+                        Hello Master,
+                        <br>now you can press button to control me.
+                    </p>
+                    <p>
+                        <i id="phone" class="material-icons">stay_current_portrait</i><br>
+                        Remember, you can throw fruits or punch by shaking your phone.<br>
+                    </p>      
+                </div>
+                
+            </div>
+            <div id="ResetBtn" ontouchstart="findMe()">
+            <p>
+                        Still have not idea where I am?
+                    </p>
+                    <button>
+                        Click and find me<br/>around the pink bus. <!-- Change text here/////////////////////////////// -->
+                    </button>
+                </div>
+        </div>        
+
+        <script type="text/javascript" src="socket.io.js"></script>
+        <script type="text/javascript" src="sendData.js"></script>
+        <script>
+            var cdTime=700;
+            var firstFlash = true;
+            var flashCount = 0;
+
+            function sendMsg(e){
+                console.log(e);
+                socket.emit(socketID,e);
+            }
+            socket.emit("admin",socketID);
+
+            socket.on(socketID,function(msg){
+                console.log(msg);
+                if (msg == "gyroOff"){
+                    document.getElementById("phoneHolder").style.display = "none";
+                    document.getElementById("characterImg").style.left = "26%";
+
+                }
+                else if(msg == "gyroOn"){
+
+                        if(firstFlash){
+                            flashScreen();
+                            firstFlash = false;
+                        }
+                        document.getElementById("phoneHolder").style.display = "block";
+                        document.getElementById("characterImg").style.left = "10%";
+                }
+            });
+
+            function flashScreen(){
+                if (flashCount%2 == 0){
+                    document.body.style.backgroundColor = "black";
+                }
+                else{
+                    document.body.style.backgroundColor = "white";
+                }
+                
+                flashCount++;
+                if(flashCount < 16){
+                    setTimeout(function(){
+                    flashScreen();
+                    },70);
+                }
+                
+            }
+
+            // var gyroSwitch = false;
+            var fire = false;
+            var dataContainerMotion = document.getElementById('dataContainerMotion');
+
+
+            function DetectThrowingMovement(){
+                var x = event.acceleration.x;
+                var y = event.acceleration.y;
+                var z = event.acceleration.z;
+                // var r = event.rotationRate;
+                var acceTotal = Math.abs(x) + Math.abs(y) + Math.abs(z);
+
+                if ( !fire && acceTotal > 28){
+                    fire = true;
+                    socket.emit(socketID, "fire");
+                    setTimeout(function(){ fire = false; }, cdTime);
+                }
+            }
+
+            function send(msg){
+                
+                if(msg=='l'){
+                    document.getElementById("left").style.opacity=0.5;
+                } else if(msg=='r'){
+                    document.getElementById("right").style.opacity=0.5;
+                } else if(msg=='s'){
+                    document.getElementById("left").style.opacity=1;
+                    document.getElementById("right").style.opacity=1;
+                }
+                sendMsg(msg);
+
+            }
+
+            function findMe(){
+                sendMsg('reset');
+            }
+
+            function openNav() {
+                document.getElementById("myNav").style.height = "100%";
+
+            }
+
+            function closeNav() {
+                document.getElementById("myNav").style.height = "0%";
+            }
+
+            document.ontouchmove = function(event){
+                event.preventDefault();
+            }
+
+            window.addEventListener('devicemotion',DetectThrowingMovement);
+
+        </script>
+    </body>
+</html>
