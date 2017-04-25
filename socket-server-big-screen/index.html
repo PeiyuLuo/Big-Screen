@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<meta content='width=device-width, initial-scale=1' name='viewport'/>
+	<head>
+    <script type="text/javascript" src="socket.io.js"></script>
+		<script>
+			var socket = io.connect('http://172.16.221.72:8888/');
+            function sendTest(e){
+            	console.log("send test");
+				// socket.send(e);
+				socket.emit('a', e);
+			}	
+		</script>
+	</head>
+
+	<body>
+
+		<input type="button" style="width:100px; height: 40px" onclick="sendTest('w')" value="up">
+		<input type="button" style="width:100px; height: 40px" ontouchstart="sendTest('s')" value="down">
+
+	<script type="text/javascript">
+		
+
+	</script>
+
+	</body>
+</html>
