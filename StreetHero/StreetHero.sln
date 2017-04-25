@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetHero.CSharp", "StreetHero.CSharp.csproj", "{89102D74-607F-35B6-70D4-396CE9210BAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreetHero.CSharp.Editor", "StreetHero.CSharp.Editor.csproj", "{4AB8AEEC-73C8-94D4-C710-481BEF34AEDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89102D74-607F-35B6-70D4-396CE9210BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89102D74-607F-35B6-70D4-396CE9210BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89102D74-607F-35B6-70D4-396CE9210BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89102D74-607F-35B6-70D4-396CE9210BAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AB8AEEC-73C8-94D4-C710-481BEF34AEDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AB8AEEC-73C8-94D4-C710-481BEF34AEDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AB8AEEC-73C8-94D4-C710-481BEF34AEDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AB8AEEC-73C8-94D4-C710-481BEF34AEDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
